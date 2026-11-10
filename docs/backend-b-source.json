@@ -1,0 +1,304 @@
+{
+  "revision": "0a48a8f0466da5c6495bd4df5d476774969465f2",
+  "files": {
+    "data/odai.json": "00c93820b93f64fb859c766e7a5b4ac158115dbdb59bf4ad24e36135b8ab0629",
+    "worker/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker/ai/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker/ai/base.py": "d514ae46a58f311da192fbf119ad9e48e4909417e45c59f559e4f4a4a39fa3f0",
+    "worker/ai/mock.py": "9ed68622b4fcd8594f662397495587a4c7eee0e014992d947d793b09553a36c7",
+    "worker/ai/preprocess.py": "df3505698581654e66015ac55a416a5e92c30f86c3367a84b1d094c3a9b62bd8",
+    "worker/ai/real.py": "3e5a291aa980eac83d5f2793ca5be2167b642a32be4f5695d89c9d06b474af00",
+    "worker/handler.py": "585515ec71762eb95d0385e13950aea9099e07935299984a5b2e3a2bdcb833ad",
+    "worker/io_memory.py": "a5d13b95634e543ab46ac5c6550b8dcacc1490bf998e396dfe50e0eba8bd64cd",
+    "worker/jobs.py": "fb72385b35f5df5519222bc37c10f79b7d22c61dbd8e3eef08f72956e511a1de",
+    "worker/main.py": "f5bf421d7cf5e9bd15be9527ae984aa259a2141f2ace61003f6faedfc1f3bc36",
+    "worker/odai.py": "f3a0c540b1175c7baed46acd342114060983ffc889d4c2f646b43651bda82c82",
+    "worker/prompts.py": "b8d6365ce51afa94eac638e2ecdcbc047522a76794a6bae9bf3a2fccb29dbc95"
+  },
+  "job_schemas": {
+    "JobPayload": {
+      "$defs": {
+        "JobKind": {
+          "enum": [
+            "image_gen",
+            "gesture_read",
+            "conclude",
+            "similarity"
+          ],
+          "title": "JobKind",
+          "type": "string"
+        }
+      },
+      "properties": {
+        "job_id": {
+          "title": "Job Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/JobKind"
+        },
+        "room_id": {
+          "title": "Room Id",
+          "type": "string"
+        },
+        "round_id": {
+          "title": "Round Id",
+          "type": "string"
+        },
+        "step_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Step Index"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "job_id",
+        "kind",
+        "room_id",
+        "round_id",
+        "revision"
+      ],
+      "title": "JobPayload",
+      "type": "object"
+    },
+    "JobResult": {
+      "$defs": {
+        "ErrorCode": {
+          "enum": [
+            "AI_FAILED",
+            "AI_TIMEOUT",
+            "AI_BAD_OUTPUT",
+            "AI_BLOCKED",
+            "INVALID_INPUT"
+          ],
+          "title": "ErrorCode",
+          "type": "string"
+        },
+        "ErrorInfo": {
+          "properties": {
+            "code": {
+              "$ref": "#/$defs/ErrorCode"
+            },
+            "message": {
+              "title": "Message",
+              "type": "string"
+            },
+            "retryable": {
+              "title": "Retryable",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "title": "ErrorInfo",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "asset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Asset Id"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "title": "JobResult",
+      "type": "object"
+    },
+    "JobDoc": {
+      "$defs": {
+        "ErrorCode": {
+          "enum": [
+            "AI_FAILED",
+            "AI_TIMEOUT",
+            "AI_BAD_OUTPUT",
+            "AI_BLOCKED",
+            "INVALID_INPUT"
+          ],
+          "title": "ErrorCode",
+          "type": "string"
+        },
+        "ErrorInfo": {
+          "properties": {
+            "code": {
+              "$ref": "#/$defs/ErrorCode"
+            },
+            "message": {
+              "title": "Message",
+              "type": "string"
+            },
+            "retryable": {
+              "title": "Retryable",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "title": "ErrorInfo",
+          "type": "object"
+        },
+        "JobKind": {
+          "enum": [
+            "image_gen",
+            "gesture_read",
+            "conclude",
+            "similarity"
+          ],
+          "title": "JobKind",
+          "type": "string"
+        },
+        "JobStatus": {
+          "enum": [
+            "pending",
+            "processing",
+            "done",
+            "failed"
+          ],
+          "title": "JobStatus",
+          "type": "string"
+        }
+      },
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/JobKind"
+        },
+        "status": {
+          "$ref": "#/$defs/JobStatus"
+        },
+        "attempt": {
+          "default": 0,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "max_attempts": {
+          "default": 3,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "last_error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "status",
+        "revision"
+      ],
+      "title": "JobDoc",
+      "type": "object"
+    },
+    "ErrorInfo": {
+      "$defs": {
+        "ErrorCode": {
+          "enum": [
+            "AI_FAILED",
+            "AI_TIMEOUT",
+            "AI_BAD_OUTPUT",
+            "AI_BLOCKED",
+            "INVALID_INPUT"
+          ],
+          "title": "ErrorCode",
+          "type": "string"
+        }
+      },
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    }
+  },
+  "previous_revision": "c8e2375ee4e432d75b67df62385fb567d9023692"
+}

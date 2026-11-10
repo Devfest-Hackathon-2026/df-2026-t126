@@ -1,0 +1,34 @@
+# REVIEW TEMPLATE ONLY. Not applied. Replace uppercase placeholders.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gesture-relay-api
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "2"
+    spec:
+      serviceAccountName: API_SERVICE_ACCOUNT
+      containerConcurrency: 8
+      timeoutSeconds: 60
+      containers:
+        - image: REVIEWED_IMAGE_DIGEST
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          env:
+            - {name: RUNTIME_MODE, value: cloud}
+            - {name: ENABLE_CLOUD, value: "false"}
+            - {name: AI_MODE, value: mock}
+            - {name: PROJECT_ID, value: PROJECT_ID}
+            - {name: BUCKET_NAME, value: PRIVATE_BUCKET}
+            - {name: TASKS_LOCATION, value: TASKS_LOCATION}
+            - {name: TASKS_QUEUE, value: EXISTING_QUEUE}
+            - {name: WORKER_URL, value: "https://WORKER_HOST/internal/jobs"}
+            - {name: DEADLINE_URL, value: "https://DEADLINE_HOST/internal/deadlines"}
+            - {name: TASKS_SERVICE_ACCOUNT, value: TASKS_SERVICE_ACCOUNT}
+            - {name: INTERNAL_AUDIENCE, value: "https://DEADLINE_HOST"}

@@ -1,0 +1,354 @@
+[
+  {
+    "odai_id": "odai_001",
+    "text": "走っているいぬ",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "いぬ",
+    "action": "走っている"
+  },
+  {
+    "odai_id": "odai_002",
+    "text": "寝ているねこ",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "ねこ",
+    "action": "寝ている"
+  },
+  {
+    "odai_id": "odai_003",
+    "text": "泳いでいるペンギン",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "ペンギン",
+    "action": "泳いでいる"
+  },
+  {
+    "odai_id": "odai_004",
+    "text": "竹を食べているパンダ",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "パンダ",
+    "action": "竹を食べている"
+  },
+  {
+    "odai_id": "odai_005",
+    "text": "踊っているうさぎ",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "うさぎ",
+    "action": "踊っている"
+  },
+  {
+    "odai_id": "odai_006",
+    "text": "飛んでいる小鳥",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "小鳥",
+    "action": "飛んでいる"
+  },
+  {
+    "odai_id": "odai_007",
+    "text": "歌っているかえる",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "かえる",
+    "action": "歌っている"
+  },
+  {
+    "odai_id": "odai_008",
+    "text": "手を振っているくま",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "くま",
+    "action": "手を振っている"
+  },
+  {
+    "odai_id": "odai_009",
+    "text": "本を読んでいるペンギン",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "ペンギン",
+    "action": "本を読んでいる"
+  },
+  {
+    "odai_id": "odai_010",
+    "text": "傘をさしているねこ",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "ねこ",
+    "action": "傘をさしている"
+  },
+  {
+    "odai_id": "odai_011",
+    "text": "自転車に乗っているいぬ",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "いぬ",
+    "action": "自転車に乗っている"
+  },
+  {
+    "odai_id": "odai_012",
+    "text": "水を飲んでいるぞう",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "ぞう",
+    "action": "水を飲んでいる"
+  },
+  {
+    "odai_id": "odai_013",
+    "text": "笑っているライオン",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "ライオン",
+    "action": "笑っている"
+  },
+  {
+    "odai_id": "odai_014",
+    "text": "ジャンプしているうさぎ",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "うさぎ",
+    "action": "ジャンプしている"
+  },
+  {
+    "odai_id": "odai_015",
+    "text": "木の上で寝ているふくろう",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "ふくろう",
+    "action": "木の上で寝ている"
+  },
+  {
+    "odai_id": "odai_016",
+    "text": "走っているうま",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "うま",
+    "action": "走っている"
+  },
+  {
+    "odai_id": "odai_017",
+    "text": "泳いでいるくじら",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "くじら",
+    "action": "泳いでいる"
+  },
+  {
+    "odai_id": "odai_018",
+    "text": "木に登っているさる",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "さる",
+    "action": "木に登っている"
+  },
+  {
+    "odai_id": "odai_019",
+    "text": "スケートをしているペンギン",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "ペンギン",
+    "action": "スケートをしている"
+  },
+  {
+    "odai_id": "odai_020",
+    "text": "ギターをひいているねこ",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "ねこ",
+    "action": "ギターをひいている"
+  },
+  {
+    "odai_id": "odai_021",
+    "text": "ボールを追いかけているいぬ",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "いぬ",
+    "action": "ボールを追いかけている"
+  },
+  {
+    "odai_id": "odai_022",
+    "text": "眠っているパンダ",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "パンダ",
+    "action": "眠っている"
+  },
+  {
+    "odai_id": "odai_023",
+    "text": "飛んでいるおばけ",
+    "category": "キャラクター",
+    "difficulty": 1,
+    "subject": "おばけ",
+    "action": "飛んでいる"
+  },
+  {
+    "odai_id": "odai_024",
+    "text": "踊っているロボット",
+    "category": "キャラクター",
+    "difficulty": 2,
+    "subject": "ロボット",
+    "action": "踊っている"
+  },
+  {
+    "odai_id": "odai_025",
+    "text": "歌っているおばけ",
+    "category": "キャラクター",
+    "difficulty": 2,
+    "subject": "おばけ",
+    "action": "歌っている"
+  },
+  {
+    "odai_id": "odai_026",
+    "text": "火をふいているりゅう",
+    "category": "キャラクター",
+    "difficulty": 2,
+    "subject": "りゅう",
+    "action": "火をふいている"
+  },
+  {
+    "odai_id": "odai_027",
+    "text": "手を振っているロボット",
+    "category": "キャラクター",
+    "difficulty": 1,
+    "subject": "ロボット",
+    "action": "手を振っている"
+  },
+  {
+    "odai_id": "odai_028",
+    "text": "料理をしているロボット",
+    "category": "キャラクター",
+    "difficulty": 3,
+    "subject": "ロボット",
+    "action": "料理をしている"
+  },
+  {
+    "odai_id": "odai_029",
+    "text": "空を飛んでいるうちゅうじん",
+    "category": "キャラクター",
+    "difficulty": 2,
+    "subject": "うちゅうじん",
+    "action": "空を飛んでいる"
+  },
+  {
+    "odai_id": "odai_030",
+    "text": "笑っているかぼちゃのおばけ",
+    "category": "キャラクター",
+    "difficulty": 3,
+    "subject": "かぼちゃのおばけ",
+    "action": "笑っている"
+  },
+  {
+    "odai_id": "odai_031",
+    "text": "傘をさして踊っているおばけ",
+    "category": "キャラクター",
+    "difficulty": 3,
+    "subject": "おばけ",
+    "action": "傘をさして踊っている"
+  },
+  {
+    "odai_id": "odai_032",
+    "text": "ケーキを食べているりゅう",
+    "category": "キャラクター",
+    "difficulty": 3,
+    "subject": "りゅう",
+    "action": "ケーキを食べている"
+  },
+  {
+    "odai_id": "odai_033",
+    "text": "飛んでいるロケット",
+    "category": "もの",
+    "difficulty": 1,
+    "subject": "ロケット",
+    "action": "飛んでいる"
+  },
+  {
+    "odai_id": "odai_034",
+    "text": "走っているくるま",
+    "category": "もの",
+    "difficulty": 1,
+    "subject": "くるま",
+    "action": "走っている"
+  },
+  {
+    "odai_id": "odai_035",
+    "text": "空を飛んでいるひこうき",
+    "category": "もの",
+    "difficulty": 1,
+    "subject": "ひこうき",
+    "action": "空を飛んでいる"
+  },
+  {
+    "odai_id": "odai_036",
+    "text": "海に浮かんでいるふね",
+    "category": "もの",
+    "difficulty": 1,
+    "subject": "ふね",
+    "action": "海に浮かんでいる"
+  },
+  {
+    "odai_id": "odai_037",
+    "text": "空を飛んでいるききゅう",
+    "category": "もの",
+    "difficulty": 2,
+    "subject": "ききゅう",
+    "action": "空を飛んでいる"
+  },
+  {
+    "odai_id": "odai_038",
+    "text": "走っているでんしゃ",
+    "category": "もの",
+    "difficulty": 1,
+    "subject": "でんしゃ",
+    "action": "走っている"
+  },
+  {
+    "odai_id": "odai_039",
+    "text": "踊っているりんご",
+    "category": "もの",
+    "difficulty": 3,
+    "subject": "りんご",
+    "action": "踊っている"
+  },
+  {
+    "odai_id": "odai_040",
+    "text": "蜂蜜を食べている熊",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "熊",
+    "action": "蜂蜜を食べている"
+  },
+  {
+    "odai_id": "odai_041",
+    "text": "拍手している猫",
+    "category": "動物",
+    "difficulty": 1,
+    "subject": "猫",
+    "action": "拍手している"
+  },
+  {
+    "odai_id": "odai_042",
+    "text": "蒸気船の舵を取っているネズミ",
+    "category": "動物",
+    "difficulty": 3,
+    "subject": "ネズミ",
+    "action": "蒸気船の舵を取っている"
+  },
+  {
+    "odai_id": "odai_043",
+    "text": "ネズミを追いかけている猫",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "猫",
+    "action": "ネズミを追いかけている"
+  },
+  {
+    "odai_id": "odai_044",
+    "text": "マイクで喋っている亀",
+    "category": "動物",
+    "difficulty": 2,
+    "subject": "亀",
+    "action": "マイクで喋っている"
+  }
+]

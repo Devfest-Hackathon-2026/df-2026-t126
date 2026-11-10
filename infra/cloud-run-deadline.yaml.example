@@ -1,0 +1,34 @@
+# Separate PRIVATE Run service. Run Invoker: approved Tasks SA only.
+# A's deadline + one-pass Scheduler maintenance receiver, NOT B's AI Worker.
+# Not applied. Scheduler uses /internal/maintenance and the same service audience.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gesture-relay-deadlines
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "2"
+    spec:
+      serviceAccountName: DEADLINE_SERVICE_ACCOUNT
+      containerConcurrency: 8
+      timeoutSeconds: 180
+      containers:
+        - image: REVIEWED_IMAGE_DIGEST
+          command: [uvicorn]
+          args: ["api.internal:app", "--host", "0.0.0.0", "--port", "8080", "--no-proxy-headers"]
+          ports:
+            - containerPort: 8080
+          env:
+            - {name: RUNTIME_MODE, value: cloud}
+            - {name: ENABLE_CLOUD, value: "false"}
+            - {name: AI_MODE, value: mock}
+            - {name: PROJECT_ID, value: PROJECT_ID}
+            - {name: BUCKET_NAME, value: PRIVATE_BUCKET}
+            - {name: TASKS_LOCATION, value: TASKS_LOCATION}
+            - {name: TASKS_QUEUE, value: EXISTING_QUEUE}
+            - {name: WORKER_URL, value: "https://WORKER_HOST/internal/jobs"}
+            - {name: DEADLINE_URL, value: "https://DEADLINE_HOST/internal/deadlines"}
+            - {name: TASKS_SERVICE_ACCOUNT, value: TASKS_SERVICE_ACCOUNT}
+            - {name: INTERNAL_AUDIENCE, value: "https://DEADLINE_HOST"}

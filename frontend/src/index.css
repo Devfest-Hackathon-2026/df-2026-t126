@@ -1,0 +1,1103 @@
+/*
+ * 見た目（2026-11-08 に決定）
+ * 配色「デザインは自由だ」: 背景 #EFE2D9、文字 #1B1B1B、青 #1E58EE、ピンク #FCB4C0、オレンジ #FF5936
+ * 書体: 外部のフォントは読み込まず、端末に入っている書体を使う（2026-11-09 変更）。
+ *       見出しと小さい英語は、いちばん太い字（900）でポップに見せる
+ * パソコン（幅 900px 以上）では、左右2列にする画面がある
+ */
+
+:root {
+  --bg: #efe2d9;
+  --ink: #1b1b1b;
+  --blue: #1e58ee;
+  --pink: #fcb4c0;
+  --orange: #ff5936;
+  --soft: #e3d7ce;
+  --paper: #fff;
+  --muted: rgb(27 27 27 / 68%);
+  --danger: #c0301a;
+  /* Mac・iPhone はヒラギノ、Android は Noto Sans CJK、Windows は游ゴシック・メイリオ */
+  --font-jp: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Noto Sans CJK JP', 'Yu Gothic', 'YuGothic', Meiryo;
+  --font-head: var(--font-jp), system-ui, sans-serif;
+  --font-en: 'Arial Black', 'Helvetica Neue', Arial, var(--font-jp), sans-serif;
+  --font-body: system-ui, -apple-system, var(--font-jp), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 横のはみ出し（タイトルの「伝言」など）を隠す。hidden だと sticky が効かなくなるので clip にする */
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 20px 16px 28px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+/* 見出しの上の、小さい英語 */
+.en {
+  font-family: var(--font-en);
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: var(--blue);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ---- ボタン ---- */
+
+button {
+  min-height: 48px;
+  padding: 10px 16px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--ink);
+  cursor: pointer;
+  background: var(--orange);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 4px 0 var(--ink);
+  transition:
+    transform 0.08s,
+    box-shadow 0.08s;
+}
+
+button:active:not(:disabled) {
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(3px) scale(0.98);
+}
+
+button:disabled {
+  color: rgb(27 27 27 / 45%);
+  cursor: default;
+  background: #d8ccc2;
+  box-shadow: none;
+}
+
+button.sub {
+  font-family: var(--font-body);
+  font-weight: 700;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+button.sub:disabled {
+  background: var(--soft);
+  border-color: rgb(27 27 27 / 25%);
+  box-shadow: none;
+}
+
+button.selected {
+  color: var(--paper);
+  background: var(--blue);
+}
+
+button.text-link {
+  min-height: 0;
+  padding: 4px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: underline;
+  background: none;
+  box-shadow: none;
+}
+
+/* ---- エフェクトの選択 ---- */
+
+.effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.effects button {
+  flex: 1 1 auto;
+  min-width: 72px;
+  min-height: 40px;
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.effects button.selected {
+  color: var(--paper);
+  background: var(--blue);
+}
+
+.effects button:disabled:not(.selected) {
+  background: var(--soft);
+  border-color: rgb(27 27 27 / 25%);
+  box-shadow: none;
+}
+
+.effects.modes button {
+  flex: 1 1 0;
+}
+
+/* エフェクトの種類は、名前の下に小さな見本を出す */
+.effects.types {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+.effects.types button {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  padding: 6px;
+  border-radius: 14px;
+}
+
+.effect-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 20 / 9;
+  border-radius: 8px;
+}
+
+/* 手がうまく映るための案内 */
+.tips {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px 10px 32px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--soft);
+  border-radius: 14px;
+}
+
+/* 録画までの残り時間。数字と、減っていく帯で見せる */
+.count {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+}
+
+.count p {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-weight: 700;
+}
+
+.count strong {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--orange);
+}
+
+/* スクロールしてカメラを見ているときも、残り時間が見えるように画面の上に残す */
+.count.sticky {
+  position: sticky;
+  top: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 0 var(--ink);
+}
+
+.count.locked {
+  background: var(--orange);
+}
+
+.count.locked strong {
+  color: var(--ink);
+  animation: pop 0.4s both;
+}
+
+.count.locked .count-bar i {
+  background: var(--ink);
+}
+
+.count span {
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+.count-bar {
+  height: 10px;
+  overflow: hidden;
+  background: var(--soft);
+  border-radius: 999px;
+}
+
+.count-bar i {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  border-radius: 999px;
+  transform-origin: left;
+  animation: shrink linear both;
+}
+
+.count.recording strong,
+.count.recording .count-bar i {
+  color: var(--blue);
+  background: var(--blue);
+}
+
+.count.recording strong {
+  background: none;
+}
+
+/* ---- 入力 ---- */
+
+input:not([type='checkbox']),
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 16px; /* 16px 未満だと iPhone で入力時に画面が拡大される */
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+input[type='checkbox'] {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  accent-color: var(--blue);
+}
+
+fieldset {
+  padding: 12px 14px;
+  margin: 0;
+  background: var(--soft);
+  border: 0;
+  border-radius: 14px;
+}
+
+legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.check {
+  display: flex;
+  clear: both;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  font-size: 0.95rem;
+}
+
+/* ---- 部品 ---- */
+
+/* スマホでは縦に積み、パソコンでは左右2列にする */
+.split > div {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--soft);
+  border-radius: 14px;
+}
+
+.code {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.timer {
+  align-self: flex-start;
+  padding: 4px 12px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--bg);
+  background: var(--ink);
+  border-radius: 999px;
+}
+
+.prompt {
+  padding: 12px 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+}
+
+.media {
+  display: block;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 12px;
+}
+
+.muted {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ロビーの「画面を消さないで」の注意。読み飛ばされないよう、オレンジの線で囲む */
+.keep-awake {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+  border: 2px solid var(--orange);
+  border-radius: 12px;
+}
+
+.error {
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.dot {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ---- スタート画面 ---- */
+
+.start {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 24px 16px 28px;
+  overflow: hidden;
+}
+
+.start-title .sub-title {
+  margin-top: 10px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.3rem, 6vw, 1.7rem);
+  line-height: 1.1;
+}
+
+/* 「伝言」は、スマホでは右の端から少しはみ出す */
+.start-title .big {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: min(49.5vw, 238px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.start-title .big em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.start-lead {
+  display: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.start-steps {
+  display: none;
+}
+
+.start-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 真ん中に寄せる画面（ほかの人を待つときなど） */
+.screen.center {
+  justify-content: center;
+  text-align: center;
+}
+
+.screen.center .heading {
+  align-items: center;
+}
+
+.screen.center .scene {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* ---- ロビー ---- */
+
+.people {
+  padding: 8px 4px 0;
+  overflow: hidden;
+  background: var(--soft);
+  border-radius: 14px;
+}
+
+.roles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roles button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.roles button small {
+  margin-left: auto;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* ---- 結果 ---- */
+
+.reveal > * {
+  animation: rise 0.45s both;
+}
+
+.summary {
+  gap: 10px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.summary p {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary small {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.summary strong {
+  font-size: 1.15rem;
+}
+
+/* 笑う人たちが出る前から場所を取っておく（200:130 の絵） */
+/* 結果の伝言の流れの列。スマホでは囲みを無視して、上から順に並べる（パソコンでは3列にする） */
+.chain-col {
+  display: contents;
+}
+
+.result-scene {
+  width: 100%;
+  aspect-ratio: 200 / 130;
+}
+
+.finale {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* スタンプが出る前から場所を取っておき、押したときに画面がずれないようにする */
+.stamp-area {
+  display: flex;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.stamp {
+  position: relative;
+  align-self: center;
+  width: 120px;
+  height: 120px;
+  animation: stamp 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+
+.stamp svg {
+  position: absolute;
+  inset: 0;
+}
+
+.stamp span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+.shake {
+  animation: shake 0.3s both;
+}
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti i {
+  position: absolute;
+  top: -20px;
+  animation: fall linear both;
+}
+
+/* ---- カウントダウン ---- */
+
+.big-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 5rem;
+  line-height: 1.1;
+}
+
+.big-count b {
+  font-weight: inherit;
+  animation: count 1s both;
+}
+
+.big-count b.last {
+  color: var(--orange);
+}
+
+.big-count span {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.stage {
+  position: relative;
+}
+
+/* 録画直前の 3・2・1 を、カメラ映像の上にも大きく重ねる */
+.stage-count {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 7rem;
+  line-height: 1;
+  color: var(--orange);
+  text-shadow: 4px 4px 0 var(--ink);
+  pointer-events: none;
+}
+
+.stage-count b {
+  font-weight: inherit;
+  animation: count 1s both;
+}
+
+/* 録画が始まった瞬間に、カメラ映像の上に大きく出して消える */
+.go {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--orange);
+  text-shadow: 3px 3px 0 var(--ink);
+  pointer-events: none;
+  animation:
+    pop 0.4s both,
+    fade-out 0.3s 1.3s forwards;
+}
+
+.flash {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  background: #fff;
+  animation: flash 0.35s 0.12s both;
+}
+
+/* ---- 画面の切り替え（オレンジの帯） ---- */
+
+.wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: var(--orange);
+  animation: wipe 0.76s cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+.wipe .en {
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+/* ---- 動き ---- */
+
+.slam {
+  display: inline-block;
+  animation: slam 0.5s 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.rise {
+  animation: rise 0.4s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes slam {
+  0% {
+    transform: translateX(130%) skewX(-14deg);
+  }
+  65% {
+    transform: translateX(-5%) skewX(5deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes wipe {
+  0% {
+    transform: translateX(-101%);
+  }
+  42%,
+  58% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes count {
+  0% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+  22% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: scale(3) rotate(-35deg);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(0.88) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+  }
+}
+
+@keyframes shake {
+  20% {
+    transform: translate(-4px, 3px);
+  }
+  40% {
+    transform: translate(4px, -2px);
+  }
+  60% {
+    transform: translate(-3px, -2px);
+  }
+  80% {
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(600deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition: none !important;
+  }
+
+  .wipe,
+  .confetti,
+  .flash {
+    display: none;
+  }
+}
+
+/* ---- パソコン（幅 900px 以上） ---- */
+
+@media (width >= 900px) {
+  .screen.wide {
+    max-width: 1040px;
+    padding: 40px 48px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .start {
+    display: grid;
+    grid-template-areas:
+      'left right'
+      'actions right';
+    grid-template-rows: auto auto;
+    align-content: center;
+    min-height: 100dvh;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px 48px;
+    max-width: 1200px;
+    padding: 48px 64px;
+  }
+
+  .start-left {
+    display: flex;
+    flex-direction: column;
+    grid-area: left;
+    gap: 20px;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .start-lead {
+    display: block;
+  }
+
+  .start-right {
+    display: flex;
+    flex-direction: column;
+    grid-area: right;
+    gap: 24px;
+    justify-content: center;
+    min-width: 0;
+    max-width: 520px;
+  }
+
+  .start-actions {
+    grid-area: actions;
+    align-self: start;
+  }
+
+  /* 「伝言」は、パソコンでは左の端からごく少しはみ出す */
+  .start-title .big {
+    margin-left: -40px;
+    font-size: clamp(150px, 19vw, 260px);
+  }
+
+  .start-steps {
+    display: flex;
+    gap: 8px;
+  }
+
+  .start-steps div {
+    flex: 1;
+    padding: 10px 12px;
+    background: var(--soft);
+    border-radius: 12px;
+  }
+
+  .start-steps b {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .start-actions {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .start-actions button:first-child {
+    width: 260px;
+  }
+
+  .code {
+    font-size: 4rem;
+  }
+
+  /* 結果: 上に伝言の流れを3列（最初の絵と人A／人Bのジェスチャーと AI の読み取り／人Cと最後の絵と結論）、
+     下の左に笑う人たち、右にお題・AIの答え・スタンプ。絵と録画を大きく見せる */
+  .screen.result {
+    display: grid;
+    grid-template-areas:
+      'head head'
+      'fail fail'
+      'chain chain'
+      'scene finale'
+      'scene back';
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px 48px;
+    align-items: start;
+    max-width: 1320px;
+  }
+
+  .result > .heading {
+    grid-area: head;
+  }
+
+  .result > .fail {
+    grid-area: fail;
+  }
+
+  .result-scene {
+    grid-area: scene;
+    align-self: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .result-chain {
+    display: grid;
+    grid-area: chain;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+  }
+
+  /* 伝言の流れを、列ごとに上から読む（列の中は詰めて並べ、短いカードの下に空白を作らない） */
+  .chain-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-chain .card {
+    padding: 16px;
+  }
+
+  .result-chain h3 {
+    font-size: 1.05rem;
+  }
+
+  .result-chain p {
+    font-size: 1.1rem;
+  }
+
+  .result-chain .media {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .result .finale {
+    grid-area: finale;
+  }
+
+  .result .summary strong {
+    font-size: 1.5rem;
+  }
+
+  .result .stamp-area {
+    min-height: 160px;
+  }
+
+  .result .stamp {
+    width: 160px;
+    height: 160px;
+  }
+
+  .result .stamp span {
+    font-size: 1.7rem;
+  }
+
+  .result > .back {
+    grid-area: back;
+  }
+}
+
+/* ---- 開発用 ---- */
+
+.dev-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100vh;
+}
+
+.dev-grid iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-right: 1px solid #94a3b8;
+}
+
+.dev-panel {
+  max-width: 480px;
+  margin: 24px auto;
+  padding: 0 16px;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.dev-panel button {
+  min-height: 32px;
+  margin: 4px 4px 0 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: #fff;
+  background: #475569;
+  box-shadow: none;
+}

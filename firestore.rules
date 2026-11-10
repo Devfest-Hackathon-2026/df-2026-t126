@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function member(roomId) {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/rooms/$(roomId)/players/$(request.auth.uid));
+    }
+    function roundMember(roomId, roundId) {
+      return member(roomId) && request.auth.uid in
+        get(/databases/$(database)/documents/rooms/$(roomId)/rounds/$(roundId)/private/main).data.players;
+    }
+    match /rooms/{roomId} {
+      allow get: if member(roomId);
+      allow list, write: if false;
+      match /players/{uid} {
+        allow read: if member(roomId);
+        allow write: if false;
+      }
+      match /rounds/{roundId} {
+        allow get: if roundMember(roomId, roundId);
+        allow list, write: if false;
+        match /steps/{stepIndex} {
+          allow read: if roundMember(roomId, roundId);
+          allow write: if false;
+        }
+        // private, assets, jobs, gesture_batches and result are server-only.
+        // Contents are returned exclusively through A's authorized HTTP API.
+        match /{document=**} {
+          allow read, write: if false;
+        }
+      }
+    }
+    // Includes join_codes, requests, round_lookup, config and all outboxes.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "public": "FRONTEND_BUILD_DIRECTORY",
+    "rewrites": [
+      {"source": "/api/**", "run": {"serviceId": "gesture-relay-api", "region": "REVIEWED_REGION"}},
+      {"source": "**", "destination": "/index.html"}
+    ]
+  }
+}

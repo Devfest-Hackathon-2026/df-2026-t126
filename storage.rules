@@ -1,0 +1,9 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{object=**} {
+      // Browser uploads/downloads go through the API, not public URLs/tokens.
+      allow read, write: if false;
+    }
+  }
+}
